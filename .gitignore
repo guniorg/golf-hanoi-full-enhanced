@@ -1,0 +1,51 @@
+# Node modules
+node_modules/
+
+# Production build output
+.next/
+out/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# dotenv environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# VSCode settings
+.vscode/
+
+# Mac system files
+.DS_Store
+
+# Firebase emulators
+firebase-debug.log
+.firebaserc
+.firebase/
+
+# TypeScript
+*.tsbuildinfo
+
+# Operating System files
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# Vercel build output
+.vercel/
+
+# IDEs
+.idea/
+*.sw?
+
+# Lock files (optional if using just one package manager)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
