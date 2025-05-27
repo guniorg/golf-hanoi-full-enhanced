@@ -5,7 +5,9 @@
 
 /* 전역 폰트 및 텍스트 색상 */
 body {
-  @apply font-sans text-gray-900;
+  @apply font-sans text-white;
+  background: linear-gradient(to bottom, #3b82f6, #1e40af); /* Tailwind의 blue-500 to blue-800 그라데이션 */
+  min-height: 100vh;
 }
 
 /* 예약 폼 UI 기본 스타일 */
@@ -59,5 +61,6 @@ h1, h2, h3 {
   animation: fadeout 1s ease-in-out forwards;
   animation-delay: 3.5s;
 }
+
 
 
