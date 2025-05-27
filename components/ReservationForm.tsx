@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getWeather } from '@/utils/getWeather';
+import { getWeather } from '../utils/getWeather'
 
 const golfCourses: Record<string, string[]> = {
   'PHOENIX 골프장(화빈)': ['PHOENIX', 'DRAGON', 'CHAMPION'],
