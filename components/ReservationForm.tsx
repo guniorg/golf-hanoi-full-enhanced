@@ -87,7 +87,7 @@ export default function ReservationForm() {
     <div className="min-h-screen bg-gray-100">
       <div className="bg-blue-600 text-white text-center py-8 px-4">
         <h1 className="text-3xl font-bold mb-2">⛳ Hanoi Golf Reservation</h1>
-        <p className="text-sm mb-4">QR 없이 간편한 실시간 골프장 예약</p>
+        <p className="text-sm mb-4">간편한 실시간 골프장 예약</p>
         <button
           onClick={() => window.scrollTo({ top: 400, behavior: 'smooth' })}
           className="bg-white text-blue-600 font-semibold px-6 py-2 rounded-full text-lg shadow hover:bg-blue-100"

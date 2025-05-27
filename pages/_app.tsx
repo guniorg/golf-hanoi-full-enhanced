@@ -1,4 +1,3 @@
-// pages/_app.tsx
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { useEffect, useState } from 'react'
@@ -8,7 +7,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const [showSplash, setShowSplash] = useState(true)
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowSplash(false), 2000) // 2초 동안 보여줌
+    const timer = setTimeout(() => setShowSplash(false), 3500)
     return () => clearTimeout(timer)
   }, [])
 
@@ -16,4 +15,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return <Component {...pageProps} />
 }
+
+
 
