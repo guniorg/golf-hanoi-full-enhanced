@@ -5,6 +5,7 @@
     "dev": "next dev"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.7",
     "@types/node": "22.15.21",
     "@types/react": "19.1.5",
     "autoprefixer": "^10.4.21",
