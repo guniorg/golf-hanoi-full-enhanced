@@ -1,4 +1,4 @@
-body { font-family: sans-serif; }/* Tailwind 기본 설정 포함 */
+/* Tailwind 기본 설정 포함 */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -45,3 +45,4 @@ h1, h2, h3 {
 .icon-label {
   @apply inline-flex items-center space-x-1;
 }
+
