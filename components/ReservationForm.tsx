@@ -1,4 +1,5 @@
 'use client';
+
 import { useState, useEffect } from 'react';
 import { getWeather } from '@utils/getWeather';
 
@@ -83,102 +84,114 @@ export default function ReservationForm() {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-md space-y-4 text-sm sm:text-base">
-      <h1 className="text-2xl font-bold mb-4">🏌️ Hanoi Golf Reservation</h1>
-
-      <div>
-        <label className="font-semibold">📅 Date</label>
-        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="w-full border p-2 rounded mt-1" />
-      </div>
-
-      <div>
-        <label className="font-semibold">⛳ Golf Club</label>
-        <select
-          value={selectedGolfClub}
-          onChange={(e) => {
-            setSelectedGolfClub(e.target.value);
-            setCourse('');
-          }}
-          className="w-full border p-2 rounded mt-1"
+    <div className="min-h-screen bg-gray-100">
+      <div className="bg-blue-600 text-white text-center py-8 px-4">
+        <h1 className="text-3xl font-bold mb-2">⛳ Hanoi Golf Reservation</h1>
+        <p className="text-sm mb-4">QR 없이 간편한 실시간 골프장 예약</p>
+        <button
+          onClick={() => window.scrollTo({ top: 400, behavior: 'smooth' })}
+          className="bg-white text-blue-600 font-semibold px-6 py-2 rounded-full text-lg shadow hover:bg-blue-100"
         >
-          <option value="">-- Select --</option>
-          {Object.keys(golfCourses).map((club) => (
-            <option key={club} value={club}>{club}</option>
-          ))}
-        </select>
+          지금 예약하기
+        </button>
       </div>
 
-      <div>
-        <label className="font-semibold">📌 Golf Course</label>
-        <select
-          value={course}
-          onChange={(e) => setCourse(e.target.value)}
-          className="w-full border p-2 rounded mt-1"
-          disabled={!selectedGolfClub}
-        >
-          <option value="">-- Select --</option>
-          {selectedGolfClub && golfCourses[selectedGolfClub]?.map((c) => (
-            <option key={c} value={c}>{c}</option>
-          ))}
-        </select>
-      </div>
-
-      <div>
-        <label className="font-semibold">🕘 Tee Time</label>
-        <select value={teeTime} onChange={(e) => setTeeTime(e.target.value)} className="w-full border p-2 rounded mt-1">
-          <option value="">-- Select --</option>
-          {teeTimes.map((time) => (
-            <option key={time} value={time}>{time}</option>
-          ))}
-        </select>
-      </div>
-
-      <div>
-        <label className="font-semibold">👥 People (max 4)</label>
-        <input
-          type="number"
-          value={people}
-          min={1}
-          max={4}
-          onChange={(e) => setPeople(Math.min(4, Math.max(1, Number(e.target.value))))}
-          className="w-full border p-2 rounded mt-1"
-        />
-      </div>
-
-      <div>
-        <label className="font-semibold">📧 Email</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full border p-2 rounded mt-1"
-          required
-        />
-      </div>
-
-      {weather && <p>🌤️ 날씨: {weather}</p>}
-      {price !== null && <p>💰 요금: {price.toLocaleString()} VND</p>}
-
-      <button
-        onClick={handleSubmit}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded transition duration-200"
-      >
-        예약하기
-      </button>
-
-      {successInfo && (
-        <div className="mt-6 p-4 border rounded-md bg-green-50 text-sm">
-          <h2 className="text-lg font-bold text-green-700 mb-2">✅ 예약이 완료되었습니다!</h2>
-          <ul className="space-y-1">
-            <li>📅 <strong>Date:</strong> {successInfo.date}</li>
-            <li>🏌️ <strong>Golf Course:</strong> {successInfo.course}</li>
-            <li>🕘 <strong>Tee Time:</strong> {successInfo.teeTime}</li>
-            <li>👥 <strong>People:</strong> {successInfo.people}</li>
-            <li>🌤️ <strong>Weather:</strong> {successInfo.weather || '날씨 정보 없음'}</li>
-          </ul>
-          <p className="mt-2 text-gray-600">📩 이메일로도 발송되었습니다.</p>
+      <div className="max-w-md mx-auto p-6 bg-white mt-6 shadow-md rounded-xl text-lg space-y-4">
+        <div>
+          <label className="font-semibold">📅 날짜 선택 / Chọn ngày</label>
+          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="w-full border p-3 rounded mt-1" />
         </div>
-      )}
+
+        <div>
+          <label className="font-semibold">🏌 골프장 선택 / Chọn sân golf</label>
+          <select
+            value={selectedGolfClub}
+            onChange={(e) => {
+              setSelectedGolfClub(e.target.value);
+              setCourse('');
+            }}
+            className="w-full border p-3 rounded mt-1"
+          >
+            <option value="">-- 선택 --</option>
+            {Object.keys(golfCourses).map((club) => (
+              <option key={club} value={club}>{club}</option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="font-semibold">📌 코스 선택 / Chọn loại sân</label>
+          <select
+            value={course}
+            onChange={(e) => setCourse(e.target.value)}
+            className="w-full border p-3 rounded mt-1"
+            disabled={!selectedGolfClub}
+          >
+            <option value="">-- 선택 --</option>
+            {selectedGolfClub && golfCourses[selectedGolfClub]?.map((c) => (
+              <option key={c} value={c}>{c}</option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="font-semibold">🕘 시간 선택 / Chọn thời gian</label>
+          <select value={teeTime} onChange={(e) => setTeeTime(e.target.value)} className="w-full border p-3 rounded mt-1">
+            <option value="">-- 선택 --</option>
+            {teeTimes.map((time) => (
+              <option key={time} value={time}>{time}</option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="font-semibold">👥 플레이어 수 / Số người chơi</label>
+          <input
+            type="number"
+            value={people}
+            min={1}
+            max={4}
+            onChange={(e) => setPeople(Math.min(4, Math.max(1, Number(e.target.value))))}
+            className="w-full border p-3 rounded mt-1"
+          />
+        </div>
+
+        <div>
+          <label className="font-semibold">📧 이메일 / Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full border p-3 rounded mt-1"
+            required
+          />
+        </div>
+
+        {weather && <p>🌤️ 날씨: {weather}</p>}
+        {price !== null && <p>💰 요금: {price.toLocaleString()} VND</p>}
+
+        <button
+          onClick={handleSubmit}
+          className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold text-xl py-3 rounded-xl transition"
+        >
+          예약 확인 / Xác nhận đặt
+        </button>
+
+        {successInfo && (
+          <div className="mt-6 p-4 border rounded-md bg-green-50 text-sm">
+            <h2 className="text-lg font-bold text-green-700 mb-2">✅ 예약이 완료되었습니다!</h2>
+            <ul className="space-y-1">
+              <li>📅 <strong>Date:</strong> {successInfo.date}</li>
+              <li>🏌️ <strong>Golf Course:</strong> {successInfo.course}</li>
+              <li>🕘 <strong>Tee Time:</strong> {successInfo.teeTime}</li>
+              <li>👥 <strong>People:</strong> {successInfo.people}</li>
+              <li>🌤️ <strong>Weather:</strong> {successInfo.weather || '날씨 정보 없음'}</li>
+            </ul>
+            <p className="mt-2 text-gray-600">📩 이메일로도 발송되었습니다.</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
+
