@@ -46,6 +46,12 @@ h1, h2, h3 {
   @apply inline-flex items-center space-x-1;
 }
 
+/* 스플래시 화면 그라데이션 배경 */
+.splash-bg {
+  @apply fixed inset-0 flex items-center justify-center text-white z-50 text-center px-6;
+  background: linear-gradient(to bottom, #1e3a8a, #3b82f6); /* Tailwind의 blue-800 to blue-500 */
+}
+
 /* 스플래시 페이드 아웃 애니메이션 */
 @keyframes fadeout {
   0% {
@@ -58,7 +64,7 @@ h1, h2, h3 {
 
 .animate-fadeout {
   animation: fadeout 1s ease-in-out forwards;
-  animation-delay: 1.5s;
+  animation-delay: 3.5s; /* ✅ 3.5초 유지 후 사라짐 */
 }
 
 
