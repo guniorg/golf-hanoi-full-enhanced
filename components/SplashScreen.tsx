@@ -8,21 +8,21 @@ export default function SplashScreen() {
   const [started, setStarted] = useState(false)
 
   const handleStart = () => {
-    setStarted(true) // 먼저 시작 상태를 true로 바꾸고
+    setStarted(true)
     setTimeout(() => {
       if (videoRef.current) {
         videoRef.current.muted = false
         videoRef.current.volume = 1.0
         videoRef.current.play()
       }
-    }, 100) // 렌더링 후 재생을 약간 지연시켜 안전하게 실행
+    }, 100)
   }
 
   useEffect(() => {
     if (!videoRef.current) return
 
     const handleEnded = () => {
-      router.push('/') // 영상이 끝나면 메인 화면으로 이동
+      router.push('/') // 영상이 끝나면 홈으로 이동
     }
 
     const video = videoRef.current
@@ -46,17 +46,19 @@ export default function SplashScreen() {
 
       {!started && (
         <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center z-20 bg-black">
-          <button
-            onClick={handleStart}
-            className="text-white text-xl font-bold bg-blue-600 px-8 py-4 rounded-xl shadow-lg hover:bg-blue-700 transition"
-          >
-            🔊 화면을 누르면 시작합니다
+          <button onClick={handleStart} className="focus:outline-none">
+            <img
+              src="/start-button.png" // public 폴더에 위치해야 함
+              alt="화면을 누르면 시작합니다"
+              className="w-3/5 max-w-xs sm:w-2/5 md:w-1/4 lg:w-1/5"
+            />
           </button>
         </div>
       )}
     </div>
   )
 }
+
 
 
 
