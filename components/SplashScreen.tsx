@@ -16,7 +16,7 @@ export default function SplashScreen() {
 
     if (clicked) {
       const timer = setTimeout(() => {
-        router.push('/') // 예약 화면으로 이동
+        router.push('/') // 예약 페이지로 이동
       }, 3500)
       return () => clearTimeout(timer)
     }
@@ -32,17 +32,18 @@ export default function SplashScreen() {
         className="absolute top-0 left-0 w-full h-full object-cover"
         src="/intro.mp4"
         autoPlay
-        muted={!clicked} // 클릭 전에는 muted, 클릭 시 해제
+        muted={!clicked}
         playsInline
       />
       {!clicked && (
-        <div className="absolute bottom-10 w-full text-center text-white text-lg">
+        <div className="absolute top-0 left-0 w-full text-center text-white text-base font-semibold bg-black/40 py-2 z-10">
           🔊 화면을 눌러 사운드를 켜주세요
         </div>
       )}
     </div>
   )
 }
+
 
 
 
