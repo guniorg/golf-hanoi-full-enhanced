@@ -8,15 +8,21 @@ export default function SplashScreen() {
   const router = useRouter();
   const [started, setStarted] = useState(false);
 
-  const handleStart = () => {
+  const handleStart = async () => {
+    if (!videoRef.current) return;
+
     setStarted(true);
-    if (videoRef.current) {
+    try {
       videoRef.current.volume = 1.0;
-      videoRef.current.play();
+      await videoRef.current.play();
+    } catch (err) {
+      console.error("Video play failed", err);
     }
-    setTimeout(() => {
+
+    // 영상 재생이 끝나면 이동
+    videoRef.current.onended = () => {
       router.push('/reservation');
-    }, 6000); // 6초 후 이동
+    };
   };
 
   return (
@@ -38,12 +44,13 @@ export default function SplashScreen() {
         ref={videoRef}
         src="/intro.mp4"
         className="absolute top-0 left-0 w-full h-full object-cover"
-        muted
         playsInline
+        controls={false}
       />
     </div>
   );
 }
+
 
 
 
