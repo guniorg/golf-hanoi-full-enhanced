@@ -8,8 +8,9 @@ body {
   min-height: 100vh;
 }
 
+/* globals.css 에 추가 */
 .bg-reservation {
-  background-image: url('/reservation-bg.jpg');
+  background-image: url('/background-2nd.jpg'); /* 실제 파일명 확인 */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
