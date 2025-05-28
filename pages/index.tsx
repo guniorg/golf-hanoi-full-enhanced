@@ -1,11 +1,8 @@
+// pages/index.tsx
 'use client';
 
-import ReservationForm from '@components/ReservationForm';
+import SplashScreen from '../components/SplashScreen';
 
 export default function Home() {
-  return (
-    <main>
-      <ReservationForm />
-    </main>
-  );
+  return <SplashScreen />;
 }
