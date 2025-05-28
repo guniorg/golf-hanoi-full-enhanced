@@ -11,12 +11,12 @@ export default function SplashScreen() {
     setClicked(true)
     if (videoRef.current) {
       videoRef.current.play()
-      videoRef.current.volume = 1.0 // 최대 볼륨
+      videoRef.current.volume = 1.0
     }
   }
 
   const handleEnded = () => {
-    router.push('/reserve') // 영상이 끝나면 예약 페이지로 이동
+    router.push('/reserve')
   }
 
   return (
@@ -24,7 +24,7 @@ export default function SplashScreen() {
       {!clicked && (
         <button
           onClick={handleClick}
-          className="z-10 text-xl md:text-3xl text-white font-bold bg-blue-600 px-8 py-4 rounded-xl shadow-lg animate-bounce"
+          className="z-10 text-white font-bold text-[7vw] md:text-[5vw] text-center px-4 py-2 rounded-xl bg-blue-600 shadow-lg animate-pulse"
         >
           🔊 화면을 누르면 시작합니다
         </button>
@@ -41,6 +41,7 @@ export default function SplashScreen() {
     </div>
   )
 }
+
 
 
 
