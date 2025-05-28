@@ -12,17 +12,20 @@ export default function SplashScreen() {
     if (!videoRef.current) return;
 
     setStarted(true);
+
     try {
       videoRef.current.volume = 1.0;
       await videoRef.current.play();
+
+      // 영상이 실제 재생되면 타이머 시작
+      videoRef.current.onplaying = () => {
+        setTimeout(() => {
+          router.push('/reservation');
+        }, 6000);
+      };
     } catch (err) {
       console.error("Video play failed", err);
     }
-
-    // 영상 재생이 끝나면 이동
-    videoRef.current.onended = () => {
-      router.push('/reservation');
-    };
   };
 
   return (
@@ -50,6 +53,7 @@ export default function SplashScreen() {
     </div>
   );
 }
+
 
 
 
