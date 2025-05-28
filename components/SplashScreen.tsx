@@ -4,32 +4,32 @@ import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function SplashScreen() {
-  const [started, setStarted] = useState(false); // 처음엔 false
-  const [videoEnded, setVideoEnded] = useState(false); // 영상 종료 확인
-  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [hasStarted, setHasStarted] = useState(false);
+  const [isVideoVisible, setIsVideoVisible] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const router = useRouter();
 
-  // 시작 버튼 클릭 시
   const handleStartClick = () => {
-    setStarted(true);
-    if (videoRef.current) {
-      videoRef.current.currentTime = 0;
-      videoRef.current.play();
-    }
+    setHasStarted(true);
+    setIsVideoVisible(true);
+    setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.volume = 1;
+        videoRef.current.play();
+      }
+    }, 100); // 짧은 지연 후 재생
   };
 
-  // 영상이 끝났을 때만 이동
-  const handleVideoEnd = () => {
-    setVideoEnded(true);
+  const handleVideoEnded = () => {
     router.push('/reservation');
   };
 
   return (
     <div className="w-screen h-screen bg-black flex items-center justify-center overflow-hidden relative">
-      {!started && (
+      {!hasStarted && (
         <button
           onClick={handleStartClick}
-          className="absolute inset-0 w-full h-full flex items-center justify-center z-10"
+          className="absolute inset-0 w-full h-full z-10 flex items-center justify-center"
         >
           <img
             src="/start-button.png"
@@ -39,21 +39,22 @@ export default function SplashScreen() {
         </button>
       )}
 
-      {started && (
+      {isVideoVisible && (
         <video
           ref={videoRef}
           src="/intro.mp4"
           className="absolute inset-0 w-full h-full object-cover"
-          onEnded={handleVideoEnd}
-          autoPlay
+          onEnded={handleVideoEnded}
           playsInline
           muted={false}
           controls={false}
+          autoPlay={false} // 강제 자동 재생 안 함
         />
       )}
     </div>
   );
 }
+
 
 
 
