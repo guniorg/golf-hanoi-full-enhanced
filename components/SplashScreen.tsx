@@ -8,19 +8,21 @@ export default function SplashScreen() {
   const [started, setStarted] = useState(false)
 
   const handleStart = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = false
-      videoRef.current.volume = 1.0
-      videoRef.current.play()
-    }
-    setStarted(true)
+    setStarted(true) // 먼저 시작 상태를 true로 바꾸고
+    setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.muted = false
+        videoRef.current.volume = 1.0
+        videoRef.current.play()
+      }
+    }, 100) // 렌더링 후 재생을 약간 지연시켜 안전하게 실행
   }
 
   useEffect(() => {
     if (!videoRef.current) return
 
     const handleEnded = () => {
-      router.push('/') // 예약 페이지로 이동
+      router.push('/') // 영상이 끝나면 메인 화면으로 이동
     }
 
     const video = videoRef.current
@@ -33,16 +35,17 @@ export default function SplashScreen() {
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-black">
-      <video
-        ref={videoRef}
-        className="absolute top-0 left-0 w-full h-full object-cover"
-        src="/intro.mp4"
-        playsInline
-        muted
-      />
-      
+      {started && (
+        <video
+          ref={videoRef}
+          className="absolute top-0 left-0 w-full h-full object-cover"
+          src="/intro.mp4"
+          playsInline
+        />
+      )}
+
       {!started && (
-        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center z-20 bg-black bg-opacity-60">
+        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center z-20 bg-black">
           <button
             onClick={handleStart}
             className="text-white text-xl font-bold bg-blue-600 px-8 py-4 rounded-xl shadow-lg hover:bg-blue-700 transition"
@@ -54,6 +57,7 @@ export default function SplashScreen() {
     </div>
   )
 }
+
 
 
 
