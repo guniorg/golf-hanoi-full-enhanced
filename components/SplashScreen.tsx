@@ -1,32 +1,39 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 
 export default function SplashScreen() {
-  const [clicked, setClicked] = useState(false);
+  const [started, setStarted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const router = useRouter();
 
   const handleStart = () => {
-    setClicked(true);
+    setStarted(true);
 
-    // 영상 사운드 최대, 재생
+    // 재생 시작
     if (videoRef.current) {
-      videoRef.current.volume = 1.0;
-      videoRef.current.play();
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            // 성공적으로 재생됨
+          })
+          .catch((error) => {
+            console.error('자동 재생 실패:', error);
+          });
+      }
     }
+  };
 
-    // 6초 후 예약 페이지로 이동
-    setTimeout(() => {
-      router.push('/reservation');
-    }, 6000);
+  const handleVideoEnd = () => {
+    router.push('/reservation');
   };
 
   return (
-    <div className="w-screen h-screen bg-black flex items-center justify-center relative">
-      {!clicked ? (
-        <button onClick={handleStart} className="absolute inset-0 flex items-center justify-center">
+    <div className="flex items-center justify-center h-screen bg-black">
+      {!started ? (
+        <button onClick={handleStart} className="start-button-animation">
           <img
             src="/start-button.png"
             alt="화면을 누르면 시작합니다"
@@ -38,12 +45,17 @@ export default function SplashScreen() {
           ref={videoRef}
           src="/intro.mp4"
           className="w-full h-full object-cover"
+          onEnded={handleVideoEnd}
+          autoPlay
           playsInline
+          muted={false}
+          controls={false}
         />
       )}
     </div>
   );
 }
+
 
 
 
