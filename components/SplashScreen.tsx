@@ -1,46 +1,53 @@
 'use client'
+
 import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 
 export default function SplashScreen() {
+  const [started, setStarted] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const router = useRouter()
-  const [clicked, setClicked] = useState(false)
 
-  const handleClick = () => {
-    setClicked(true)
-    if (videoRef.current) {
-      videoRef.current.play()
-      videoRef.current.volume = 1.0
+  const handleStart = () => {
+    setStarted(true)
+    const video = videoRef.current
+    if (video) {
+      video.volume = 1.0
+      video.play()
     }
-  }
-
-  const handleEnded = () => {
-    router.push('/reserve')
+    // 6초 후 예약 페이지로 이동
+    setTimeout(() => {
+      router.push('/')
+    }, 6000)
   }
 
   return (
-    <div className="relative w-screen h-screen flex items-center justify-center bg-black overflow-hidden">
-      {!clicked && (
+    <div className="relative w-screen h-screen flex items-center justify-center bg-black">
+      {!started && (
         <button
-          onClick={handleClick}
-          className="z-10 text-white font-bold text-[7vw] md:text-[5vw] text-center px-4 py-2 rounded-xl bg-blue-600 shadow-lg animate-pulse"
+          onClick={handleStart}
+          className="absolute z-10 w-[300px] h-auto"
         >
-          🔊 화면을 누르면 시작합니다
+          <img
+            src="/start-button.png"
+            alt="Start Button"
+            className="w-full h-auto"
+          />
         </button>
       )}
-      <video
-        ref={videoRef}
-        src="/intro.mp4"
-        className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-700 ${
-          clicked ? 'opacity-100' : 'opacity-0'
-        }`}
-        onEnded={handleEnded}
-        playsInline
-      />
+
+      {started && (
+        <video
+          ref={videoRef}
+          src="/intro.mp4"
+          className="absolute top-0 left-0 w-full h-full object-cover z-0"
+          playsInline
+        />
+      )}
     </div>
   )
 }
+
 
 
 
