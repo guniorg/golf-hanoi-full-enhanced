@@ -1,44 +1,50 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 
 export default function SplashScreen() {
-  const router = useRouter();
-  const [started, setStarted] = useState(false);
+  const [clicked, setClicked] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const router = useRouter();
 
-  const handleClick = () => {
-    setStarted(true);
+  const handleStart = () => {
+    setClicked(true);
+
+    // 영상 사운드 최대, 재생
     if (videoRef.current) {
-      videoRef.current.play();
       videoRef.current.volume = 1.0;
+      videoRef.current.play();
     }
+
+    // 6초 후 예약 페이지로 이동
     setTimeout(() => {
       router.push('/reservation');
-    }, 6000); // 6초 후 이동
+    }, 6000);
   };
 
   return (
-    <div className="relative w-full h-screen flex items-center justify-center bg-black overflow-hidden">
-      {!started && (
-        <button
-          className="absolute z-10 text-4xl font-bold text-white bg-blue-600 px-8 py-4 rounded-lg shadow-lg"
-          onClick={handleClick}
-        >
-          🔊 화면을 누르면 시작합니다
+    <div className="w-screen h-screen bg-black flex items-center justify-center relative">
+      {!clicked ? (
+        <button onClick={handleStart} className="absolute inset-0 flex items-center justify-center">
+          <img
+            src="/start-button.png"
+            alt="화면을 누르면 시작합니다"
+            className="w-3/5 max-w-xs md:max-w-sm lg:max-w-md object-contain"
+          />
         </button>
+      ) : (
+        <video
+          ref={videoRef}
+          src="/intro.mp4"
+          className="w-full h-full object-cover"
+          playsInline
+        />
       )}
-      <video
-        ref={videoRef}
-        src="/intro.mp4"
-        className="w-full h-full object-cover"
-        muted={false}
-        playsInline
-      />
     </div>
   );
 }
+
 
 
 
