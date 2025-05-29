@@ -21,4 +21,11 @@
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0"
   }
+  "scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "vercel-build": "next build"
+}
+
 }
