@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 body {
-  @apply font-sans text-white;
-  background: linear-gradient(to bottom, #3b82f6, #1e40af);
+  @apply font-sans;
   min-height: 100vh;
 }
+
 
 /* globals.css 에 추가 */
 .bg-reservation {
