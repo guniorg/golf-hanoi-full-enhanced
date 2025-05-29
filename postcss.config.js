@@ -1,8 +1,8 @@
-// ✅ 수정 버전
+// postcss.config.js
 module.exports = {
   plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
+    tailwindcss: {},         // ✅ 올바른 TailwindCSS 플러그인 명
+    autoprefixer: {},        // ✅ OK
   },
 };
 
