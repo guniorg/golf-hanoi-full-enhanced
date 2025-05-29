@@ -1,10 +1,11 @@
 // postcss.config.js
 module.exports = {
   plugins: {
-    tailwindcss: {},     // ✅ 이게 맞습니다
-    autoprefixer: {},    // ✅ OK
+    tailwindcss: {},       // ✅ 반드시 이 이름! (@tailwindcss/postcss ❌ X)
+    autoprefixer: {},
   },
 };
+
 
 
 
