@@ -2,7 +2,10 @@
   "name": "golf-hanoi-final-ours",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next dev"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "vercel-build": "next build"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.7",
@@ -21,11 +24,5 @@
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0"
   }
-  "scripts": {
-  "dev": "next dev",
-  "build": "next build",
-  "start": "next start",
-  "vercel-build": "next build"
 }
 
-}
